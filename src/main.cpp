@@ -30,14 +30,14 @@ int main(void)
 
 	fclose(fd);*/
 
-	const int32_t width =  1920;
-	const int32_t height = 1080;
-	const uint32_t spp = 1000;
+	const int32_t width =  400;
+	const int32_t height = 300;
+	const uint32_t spp = 100;
 	const uint8_t thread_count = 64;
 	const double aspect_ratio = double(width)/double(height);
-	const Point3 lookfrom = Point3(-2.0,1.8,-2);
+	const Point3 lookfrom = Point3(-2.0,0.0,-1);
 	const Point3 lookat = Point3(0,0,-1);
-	const double aperture = 0.001;
+	const double aperture = 0.01;
 
 	Camera cam(lookfrom, lookat, vec3(0,1,0), 60, aspect_ratio, aperture,
 		(lookfrom - lookat).length());
@@ -46,11 +46,11 @@ int main(void)
 	DiffuseLight blue_light(Color(0.0, 0.0, 1.0));
 	DiffuseLight red_light(Color(1.0, 0.0, 0.0));
 	DiffuseLight green_light(Color(0.0, 1.0, 0.0));
-	Metal gold_material(Color(0.8, 0.6, 0.2), 0.0);
+	Metal gold_material(Color(0.8, 0.6, 0.2), 0.9);
 	Dielectric glass_mat(.9);
 
 	Sphere center_sphere(Point3(0.0, 0.0, -1.0), 0.5, &white_matte);
-	Sphere left_light(Point3(-1.0, 0.0, -1.0), 0.5, &gold_material);
+	Sphere left_light(Point3(-1.1, 0.0, -1.0), -0.5, &glass_mat);
 	Sphere right_light(Point3(1.0, 0.0, -1.0), 0.5, &red_light);
 	Sphere ground_sphere(Point3(0.0, -100.5, -1.0), 100.0, &white_matte);
 	Sphere back_light(Point3(0.0, 0.0, -2.0), 0.5, &blue_light);
@@ -67,7 +67,7 @@ int main(void)
 
 	Scene the_scene;
 	the_scene.obj = &obj_list;
-	the_scene.bg_color = Color(0,0,0);//Color(0.70, 0.80, 1.00);
+	the_scene.bg_color = Color(0.70, 0.80, 1.00);
 	the_scene.cam = &cam;
 	the_scene.use_skybox = false;
 	

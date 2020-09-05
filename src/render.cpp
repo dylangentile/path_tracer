@@ -237,24 +237,24 @@ FrameRenderer::render_loop()
 /*
 
 uint8_t* image_data = m_data;
-	for(int j = m_height - 1; j >= 0; j--)
+for(int j = m_height - 1; j >= 0; j--)
+{
+	for(int i = 0; i < m_width; i++)
 	{
-		for(int i = 0; i < m_width; i++)
+		Color pixel_color(0,0,0);
+		for(int s = 0; s < m_spp; s++)
 		{
-			Color pixel_color(0,0,0);
-			for(int s = 0; s < m_spp; s++)
-			{
-				double u = (i + random_double()) / (m_width-1);
-				double v = (j + random_double()) / (m_height-1);
-				Ray r = m_scene->cam->get_ray(u, v);
-				pixel_color += get_ray_color(r, max_depth);
-			}
-			set_current_pixel(image_data, pixel_color);
-			image_data += COLOR_SIZE;
+			double u = (i + random_double()) / (m_width-1);
+			double v = (j + random_double()) / (m_height-1);
+			Ray r = m_scene->cam->get_ray(u, v);
+			pixel_color += get_ray_color(r, max_depth);
 		}
+		set_current_pixel(image_data, pixel_color);
+		image_data += COLOR_SIZE;
 	}
-*/
+}
 
+*/
 #include <chrono>
 
 void
